@@ -10,7 +10,7 @@ def create_map(gdf, gdf_footprints):
     # Add ESRI World Imagery basemap
     # m.add_basemap("Esri.WorldImagery")
 
-    # m.add_gdf(gdf_footprints, layer_name="DARTS maximum extent", style_function=lambda x: style_footprints)
+    m.add_gdf(gdf_footprints, layer_name="DARTS maximum extent", style_function=lambda x: style_footprints)
     # m.add_gdf(gdf[:20000], layer_name="DARTS level 2", zoom_to_layer=True, style_function=style_function)
     return m
 
@@ -44,15 +44,15 @@ style_footprints = {
 
 
 # load data
-fpath = "data/DARTS_NitzeEtAl_v1_features_2018_2023_level2.parquet"
-fpath_union = "data/DARTS_NitzeEtAl_v1_coverage_2018_2023_union.parquet"
-gdf = gpd.read_parquet(fpath)
+# fpath = "data/DARTS_NitzeEtAl_v1_features_2018_2023_level2.parquet"
+fpath_union = "DARTS_NitzeEtAl_v1_coverage_2018_2023_union.parquet"
+# gdf = gpd.read_parquet(fpath)
 gdf_footprints = gpd.read_parquet(fpath_union)
 
 # Streamlit app layout
 st.title("DARTS")
 # m = leafmap.Map(zoom=9)
-m = create_map(gdf, gdf_footprints)
+m = create_map(None, gdf_footprints)
 
 # Create the map with the GeoDataFrame layer
 st_folium(m, width='100%', returned_objects=['last_object_clicked'])
