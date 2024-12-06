@@ -54,5 +54,5 @@ st.title("DARTS")
 # m = leafmap.Map(zoom=9)
 m = create_map(None, gdf_footprints)
 
-# Create the map with the GeoDataFrame layer
-st_folium(m, width='100%', returned_objects=['last_object_clicked'])
+folium_map = m.to_folium()
+st_folium(folium_map, width='100%', returned_objects=['last_object_clicked'])
