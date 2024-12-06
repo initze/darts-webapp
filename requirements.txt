@@ -1,4 +1,4 @@
-    "streamlit"
-    "jupyterlab"
-    "leafmap"
-    "geopandas"
+    streamlit
+    jupyterlab
+    leafmap
+    geopandas
