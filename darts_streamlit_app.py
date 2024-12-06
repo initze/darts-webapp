@@ -7,7 +7,7 @@ from streamlit_folium import st_folium
 # load data
 # fpath = "data/DARTS_NitzeEtAl_v1_features_2018_2023_level2.parquet"
 fpath = 'https://arcticdata.io/metacat/d1/mn/v2/object/urn%3Auuid%3A91b12042-18fb-4ded-8854-124ff3be6a11'
-# gdf = gpd.read_file(fpath)
+gdf = gpd.read_file(fpath)
 # gdf = gpd.read_parquet(fpath)
 fpath_union = "DARTS_NitzeEtAl_v1_coverage_2018_2023_union.parquet"
 gdf_footprints = gpd.read_parquet(fpath_union)
@@ -24,7 +24,6 @@ def create_map():
     m = leafmap.Map(zoom=5)
     # Add ESRI World Imagery basemap
     m.add_basemap("Esri.WorldImagery")
-    # m.add_gdf(gdf[:20000], layer_name="DARTS level 2", zoom_to_layer=True, style_function=style_function)
     return m
 
 
@@ -54,9 +53,9 @@ st.title("DARTS")
 st.title("Dynamic Polygon Dashboard")
 
 # Create the map with the GeoDataFrame layer
-m = create_map(gdf_footprints)
+m = create_map()
 m.add_gdf(gdf_footprints, layer_name="DARTS maximum extent", style_function=lambda x: style_footprints)
-# m.add_gdf(gdf, layer_name='DARTS v1 level2', style_function=style_function)
+m.add_gdf(gdf, layer_name='DARTS v1 level2', style_function=style_function)
 
 # Display the map in Streamlit using st_folium and capture clicked features
 clicked_feature = st_folium(m, width='100%', returned_objects=['last_object_clicked'])
